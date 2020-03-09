@@ -1,0 +1,30 @@
+logging:
+  level: INFO
+applicationDataSourceFactory:
+  driverClass: com.mysql.jdbc.Driver
+  user: root
+  password:
+  url: jdbc:mysql://mysql_service:3306/sw_challenge?useSSL=false
+  properties:
+    charset: UTF-8
+    maxWaitForConnections: 1s
+    validationQuery: "/* MyService Health Check */ SELECT 1"
+    minSize: 8
+    maxSize: 32
+    checkConnectionWhileIdle: false
+    evictionInterval: 10s
+    minIdleTime: 1 minute
+redis:
+  type: basic
+  name: sw_challenge_api
+  node:
+    type: redis
+    node: redis_service:6379
+    clientName: sw_challenge_api
+  redisCodec:
+    type: string
+  clientResources:
+    type: default
+    commandLatencyCollector:
+      type: default
+      enabled: false
